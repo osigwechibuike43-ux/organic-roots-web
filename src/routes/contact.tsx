@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Mail, Phone, MapPin, Clock, Instagram, Twitter, Facebook } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Instagram, Twitter, Facebook, MessageCircle } from "lucide-react";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { FadeUp } from "@/components/FadeUp";
@@ -45,6 +45,13 @@ function ContactPage() {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                const fd = new FormData(e.currentTarget);
+                const name = fd.get("name") as string;
+                const email = fd.get("email") as string;
+                const subject = fd.get("subject") as string;
+                const message = fd.get("message") as string;
+                const text = `Hello, my name is ${name}%0AEmail: ${email}%0ASubject: ${subject}%0A%0A${message}`;
+                window.open(`https://wa.me/09168144059?text=${text}`, "_blank");
                 setSent(true);
               }}
               className="bg-card ring-1 ring-border rounded-3xl p-8 md:p-10 shadow-soft flex flex-col gap-5"
@@ -55,8 +62,10 @@ function ContactPage() {
               </div>
               <Field label="Subject" name="subject" />
               <div className="flex flex-col gap-2">
-                <label className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">Message</label>
+                <label htmlFor="message" className="text-xs uppercase tracking-widest font-semibold text-muted-foreground">Message</label>
                 <textarea
+                  id="message"
+                  name="message"
                   required
                   rows={5}
                   className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:outline-none focus:ring-2 focus:ring-ring text-sm"
@@ -66,7 +75,7 @@ function ContactPage() {
                 type="submit"
                 className="self-start bg-harvest text-harvest-foreground px-6 py-3 rounded-full text-sm font-semibold hover:-translate-y-0.5 transition-transform"
               >
-                {sent ? "Message sent ✓" : "Send message"}
+                {sent ? "Opening WhatsApp…" : "Send via WhatsApp"}
               </button>
             </form>
           </FadeUp>
@@ -75,7 +84,9 @@ function ContactPage() {
           <FadeUp delay={0.15} className="lg:col-span-2 flex flex-col gap-6">
             <InfoCard icon={MapPin} title="Visit the farm" lines={["1282 Meadow Lane", "Green Valley, CA 90210"]} />
             <InfoCard icon={Mail} title="Email" lines={["hello@verdantacres.farm"]} />
-            <InfoCard icon={Phone} title="Phone" lines={["+1 (555) 482-9011"]} />
+            <a href="https://wa.me/09168144059" target="_blank" rel="noopener noreferrer" className="block">
+              <InfoCard icon={MessageCircle} title="WhatsApp" lines={["09168144059", "Tap to chat with us"]} />
+            </a>
             <InfoCard
               icon={Clock}
               title="Working hours"

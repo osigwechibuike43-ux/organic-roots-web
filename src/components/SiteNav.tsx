@@ -33,12 +33,14 @@ export function SiteNav() {
             </Link>
           ))}
         </div>
-        <Link
-          to="/products"
+        <a
+          href="https://wa.me/09168144059"
+          target="_blank"
+          rel="noopener noreferrer"
           className="bg-harvest text-harvest-foreground px-5 py-2 rounded-full text-sm font-medium ring-1 ring-harvest shadow-sm hover:-translate-y-0.5 transition-transform"
         >
           Order Direct
-        </Link>
+        </a>
       </div>
     </nav>
   );
