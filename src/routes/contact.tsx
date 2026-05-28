@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Mail, Phone, MapPin, Clock, Instagram, Twitter, Facebook } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Instagram, Twitter, Facebook, MessageCircle } from "lucide-react";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { FadeUp } from "@/components/FadeUp";
